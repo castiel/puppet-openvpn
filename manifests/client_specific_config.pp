@@ -14,6 +14,10 @@
 #   Array.  Array of iroute combinations.
 #   Default: []
 #
+# [*push*]
+#   Array.  Array of push combinations.
+#   Default: []
+#
 # [*ifconfig*]
 #   String.  IP configuration to push to the client.
 #   Default: false
@@ -29,6 +33,7 @@
 #     'vpn_client':
 #       server       => 'contractors',
 #       iroute       => ['10.0.1.0 255.255.255.0'],
+#       push         => ['10.0.1.0 255.255.255.0'],
 #       ifconfig     => '10.10.10.2 255.255.255.0',
 #       dhcp_options => ['DNS 8.8.8.8']
 #    }
@@ -60,6 +65,7 @@
 define openvpn::client_specific_config(
   $server,
   $iroute       = [],
+  $push         = [],
   $ifconfig     = false,
   $dhcp_options = []
 ) {

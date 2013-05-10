@@ -75,6 +75,10 @@
 #     servers, DNS search domains, and many other options.
 #   Default: []
 #
+# [*route*]
+#   Array.  Routes which clients publish to the server.
+#   Default: []
+#
 #
 # === Examples
 #
@@ -122,15 +126,22 @@ define openvpn::server(
   $group = false,
   $ipp = false,
   $ip_pool = [],
-  $local = $::ipaddress_eth0,
+  $local = $::ipaddress_eth0 ?{
+	undef => $::ipaddress,
+	default => $::ipaddress_eth0,
+	},
   $logfile = false,
   $port = '1194',
   $proto = 'tcp',
   $status_log = "${name}/openvpn-status.log",
   $server = '',
-  $push = []
+  $push = [],
+  $route = [],
 ) {
 
+  if $local == undef {
+    $local = $::ipaddress
+  }
   include openvpn
     Class['openvpn::install'] ->
     Openvpn::Server[$name] ~>

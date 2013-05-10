@@ -34,7 +34,7 @@ describe 'openvpn::server', :type => :define do
 
     # Execs to working with certificates
     it { should contain_exec('copy easy-rsa to openvpn config folder test_server').with(
-      'command' => '/bin/cp -r /usr/share/doc/openvpn/examples/easy-rsa/2.0 /etc/openvpn/test_server/easy-rsa'
+      'command' => '/bin/cp -r $easyrsa_source /etc/openvpn/test_server/easy-rsa'
     )}
     it { should contain_exec('generate dh param test_server') }
     it { should contain_exec('initca test_server') }
@@ -149,7 +149,7 @@ describe 'openvpn::server', :type => :define do
     )}
 
     it { should contain_exec('copy easy-rsa to openvpn config folder test_server').with(
-      'command' => '/bin/cp -r /usr/share/doc/openvpn/examples/easy-rsa/2.0 /etc/openvpn/test_server/easy-rsa'
+      'command' => '/bin/cp -r $easyrsa_source /etc/openvpn/test_server/easy-rsa'
     )}
 
     # Configure to start vpn session

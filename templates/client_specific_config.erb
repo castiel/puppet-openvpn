@@ -1,3 +1,6 @@
+<% scope.lookupvar('push').each do |push| -%>
+push "<%= push %>"
+<% end -%>
 <% scope.lookupvar('iroute').each do |route| -%>
 iroute <%= route %>
 <% end -%>

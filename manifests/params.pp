@@ -16,13 +16,15 @@
 #
 class openvpn::params {
 
-  $group = $::osfamily ? {
+  $group = $::operatingsystem ? {
     'RedHat' => 'nobody',
+    'Gentoo' => 'openvpn',
     default  => 'nogroup'
   }
 
-  $easyrsa_source = $::osfamily ? {
+  $easyrsa_source = $::operatingsystem ? {
     'RedHat'  => '/usr/share/doc/openvpn-2.2.2/easy-rsa/2.0',
+    'Gentoo' => '/usr/share/openvpn/easy-rsa',
     default   => '/usr/share/doc/openvpn/examples/easy-rsa/2.0'
   }
 
